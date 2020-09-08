@@ -1,0 +1,38 @@
+{
+  "default": "スペイン語のメッセージ",
+  "es": "スペイン語",
+  "ja": "日本人",
+  "en": "英語",
+  "phrases": {
+    "features": "特徴",
+    "apiExample": "APIの例",
+    "getShowcases": "Next.jsを使用している企業/サイト"
+  },
+  "name": "SCHOLA LEARN 🚀",
+  "title": "4〜9歳の好奇心旺盛な子供向けのライブオンラインクラス❤️",
+  "subtitle": "あなたの子供に素晴らしい、魅力的な教師から興味深いトピックについて学んでもらいます。必要なのはズームだけです。",
+  "email": {
+    "placeholder": "メールアドレス"
+  },
+  "start_button": {
+    "text": "無料で開始"
+  },
+  "login_action": "Login",
+  "subtext": "👍 カードは必要ありません。真剣に.",
+  "makewith": "☕でフロリダで作られました",
+  "privacy_policy": "個人情報保護方針",
+  "terms_of_service": "利用規約",
+  "register": {
+    "title": "クラスへのサインアップ 😄",
+    "subtitle_topic": "🚀 子供が興味を持っているトピックをタップします。好きなだけ選んでください！",
+    "subtitle_time": "📅 オンラインクラスに最適な日をタップしてください。",
+    "label_name": "あなたの名は？",
+    "label_email": "あなたの電子メールアドレスを教えてください？",
+    "label_phone": "あなたの電話番号は何ですか？",
+    "label_password": "パスワードを設定します。",
+    "placeholder_name": "Alice",
+    "placeholder_email": "you@gmail.com",
+    "placeholder_phone": "9542572554",
+    "button_action": "次"
+  }
+}
