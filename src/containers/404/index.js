@@ -1,5 +1,6 @@
 import React from 'react';
-import Link from 'next/link';
+// import Link from 'next/link';
+import { Link } from '../../../i18n';
 
 function Svg404() {
   return (

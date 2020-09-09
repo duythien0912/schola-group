@@ -1,0 +1,55 @@
+{
+  "default": "Tin nhắn bằng tiếng anh",
+  "es": "Tiếng Tây Ban Nha",
+  "ja": "Tiếng Nhật",
+  "en": "Tiếng Anh",
+  "vi": "TiếngViệt",
+  "phrases": {
+    "features": "Đặc trưng",
+    "apiExample": "Ví dụ về API",
+    "getShowcases": "Các công ty / Trang web sử dụng Next.js"
+  },
+  "name": "SCHOLA LEARN 🚀",
+  "title": "Các lớp học trực tiếp, trực tuyến dành cho những đứa trẻ tò mò từ 4-9 tuổi ❤️",
+  "subtitle": "Cho con bạn tìm hiểu về các chủ đề thú vị từ những giáo viên tuyệt vời, hấp dẫn. Tất cả những gì bạn cần là Zoom.",
+  "email": {
+    "placeholder": "Địa chỉ email của bạn"
+  },
+  "start_button": {
+    "text": "Bắt đầu cho miễn phí"
+  },
+  "login_action": "Đăng nhập",
+  "subtext": "👍 Không cần phí. Nghiêm túc.",
+  "makewith": "Make from Schola with ❤️",
+  "privacy_policy": "Chính sách bảo mật",
+  "terms_of_service": "Điều khoản dịch vụ",
+  "about_us": "Về chúng tôi",
+  "register": {
+    "title": "Đăng ký Lớp học 😄",
+    "subtitle_topic": "🚀 Nhấn vào các chủ đề mà con bạn quan tâm. Chọn bao nhiêu tùy thích!",
+    "subtitle_time": "📅 Khai thác những ngày phù hợp nhất với bạn để tham gia lớp học trực tuyến.",
+    "label_name": "Bạn tên là gì?",
+    "label_email": "Địa chỉ email của bạn là gì?",
+    "label_phone": "Số điện thoại của bạn là gì?",
+    "label_password": "Đặt mật khẩu.",
+    "placeholder_name": "Trang",
+    "placeholder_email": "your@gmail.com",
+    "placeholder_phone": "0987654321",
+    "button_action": "Tiếp theo"
+  },
+  "dashboard": {
+    "title": "Lớp học trực tiếp sắp tới 🔍",
+    "subtitle": "Xin chào, {{name}}. Hy vọng bạn có một ngày tuyệt vời. Hãy tiếp tục và đặt một số lớp học!",
+    "promote_group": "👍 Bạn muốn tham gia Nhóm Facebook của ZipSchool, nơi bạn có thể nhận tài liệu, trò chuyện với giáo viên và tham gia các lớp học nhỏ hơn?",
+    "promote_group_action": "Tham gia nhóm Facebook",
+    "promote_share": "❤️ Bạn có bạn với trẻ em không? Nhấp vào nút bên dưới để sao chép liên kết bạn có thể chia sẻ với họ để nhận được một số lớp học miễn phí!",
+    "promote_group_share": "Sao chép đường dẫn"
+  },
+  "success": {
+    "title": "Sự thành công!",
+    "subtitle": "Yay! Bạn đã sẵn sàng. Chúng tôi đã gửi một email tới {{email}} với nhiều thông tin hơn. Hẹn gặp bạn vào {{time}}",
+    "share_acion": "Chia sẻ với bạn bè của bạn",
+    "share_subtitle": "",
+    "close_action": "Đóng"
+  }
+}

@@ -7,6 +7,7 @@ import App from 'next/app';
 
 import withReduxStore from 'utils/with-redux-store';
 import { appWithTranslation } from 'utils/with-i18next';
+import { UserProvider } from '../context/user';
 
 import 'typeface-metropolis';
 import '@typefaces-pack/typeface-inter';
@@ -21,7 +22,9 @@ class Srr extends App {
         </Head>
 
         <Provider store={reduxStore}>
-          <Component {...pageProps} />
+          <UserProvider>
+            <Component {...pageProps} />
+          </UserProvider>
         </Provider>
       </React.Fragment>
     );

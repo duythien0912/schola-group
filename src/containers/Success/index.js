@@ -3,8 +3,11 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { keyframes } from '@emotion/core';
 import SelectLanguages from 'components/Header/SelectLanguages';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
+// import Link from 'next/link';
+import { Link } from '../../../i18n';
+
+// import { useRouter } from 'next/router';
+import { Router } from '../../../i18n';
 
 const bounce = keyframes`
   from, 20%, 53%, 80%, to {
@@ -34,6 +37,7 @@ const AWhite = styled('a')`
 
 const LogoImage = styled('img')`
   height: 70px;
+  cursor: pointer;
 `;
 
 const SuccessDiv = styled('div')`
@@ -85,9 +89,9 @@ export function Success({ t }) {
               <Link href="/">
                 <LogoImage src="/static/images/logo.png" />
               </Link>
-              <AWhite href="https://schola.tv/app">
+              {/* <AWhite href="https://schola.tv/app">
                 <div className="loginButton">{t('login_action')}</div>
-              </AWhite>
+              </AWhite> */}
             </div>
 
             <SuccessDiv>

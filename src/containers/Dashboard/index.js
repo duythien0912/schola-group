@@ -1,34 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { keyframes } from '@emotion/core';
-import SelectLanguages from 'components/Header/SelectLanguages';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-
-const bounce = keyframes`
-0% {transform: scale(1);} 
-10%, 20% {transform: scale(0.9) rotate(-3deg);} 
-30%, 50%, 70%, 90% {transform: scale(1.1) rotate(3deg);} 
-40%, 60%, 80% {transform: scale(1.1) rotate(-3deg);} 
-100% {transform: scale(1) rotate(0);} 
-`;
-
-const AWhite = styled('a')`
-  color: white;
-  text-decoration: none;
-  &:hover {
-    color: white;
-  }
-`;
+// import Link from 'next/link';
+import { Link } from '../../../i18n';
+// import { useRouter } from 'next/router';
+import { userContext } from '../../context/user';
+import { useObserver } from 'mobx-react-lite';
 
 const LogoImage = styled('img')`
   height: 70px;
+  cursor: pointer;
 `;
 
-const ImgSuccess = styled('img')`
-  animation: ${bounce} 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-`;
+const ImgSuccess = styled('img')``;
+//   animation: ${bounce} 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
 const EmojiDiv = styled('div')`
   margin-top: 35px;
@@ -46,8 +31,8 @@ const TextAlignCenter = styled('div')`
   text-align: center;
   font-size: 14px;
   color: rgba(0, 0, 0, 0.6);
-  padding: 0px 24px;
 `;
+// padding: 0px 24px;
 
 const groupClass = [
   {
@@ -114,8 +99,31 @@ const groupClass = [
 
 export function Dashboard({ t }) {
   const [modelOpen, setModelOpen] = useState(false);
+  const [copySuccess, setCopySuccess] = useState(false);
 
-  return (
+  const copyToClipBoard = async copyMe => {
+    try {
+      await navigator.clipboard.writeText(copyMe);
+      setCopySuccess(true);
+      alert('Copy Success');
+      console.log(copySuccess);
+    } catch (err) {
+      setCopySuccess(false);
+    }
+  };
+
+  const openInNewTab = url => {
+    const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
+    if (newWindow) newWindow.opener = null;
+  };
+
+  const store = useContext(userContext);
+
+  useEffect(() => {
+    console.log(store.getData());
+  }, [store]);
+
+  return useObserver(() => (
     <>
       <div>
         <div className="purpleBackground">
@@ -125,14 +133,12 @@ export function Dashboard({ t }) {
               <Link href="/">
                 <LogoImage src="/static/images/logo.png" />
               </Link>
-              <AWhite href="https://schola.tv/app">
+              {/* <AWhite href="https://schola.tv/app">
                 <div className="loginButton">{t('login_action')}</div>
-              </AWhite>
+              </AWhite> */}
             </div>
-            <div className="exploreClassesTitle">Upcoming Live Classes 🔍</div>
-            <div className="welcomeText">
-              Hi there, asdsad. Hope you're having an awesome day. Go ahead and book some classes!
-            </div>
+            <div className="exploreClassesTitle">{t('dashboard.title')}</div>
+            <div className="welcomeText">{t('dashboard.subtitle', { name: store.name })}</div>
             <div className="allClassesContainer">
               {groupClass.map((item, index) => (
                 <div key={`classContainer_${index}`} className="classContainer">
@@ -166,36 +172,51 @@ export function Dashboard({ t }) {
             <div>
               <div id="open-modal" className={`modal-window model-window_${modelOpen}`}>
                 <div className="fancyBoxBase">
-                  <a href="#" title="Close" className="modal-close" onClick={e => setModelOpen(false)}>
-                    Close
-                  </a>
+                  <button type="button" title="Close" className="modal-close" onClick={e => setModelOpen(false)}>
+                    {t('success.close_action')}
+                  </button>
                   <EmojiDiv className="emoji">
-                    <ImgSuccess className={`model_${modelOpen}`} src="/static/images/tada.svg" width={250} />
+                    <ImgSuccess className={`model_${modelOpen}`} src="/static/images/tada.svg" width={120} />
                   </EmojiDiv>
-                  <SuccessText>Success!</SuccessText>
+                  <SuccessText>{t('success.title')}</SuccessText>
                   <TextAlignCenter>
-                    Yay! You're all set. We sent an email to asdas@asds.asdasd with more info. See you on Thursday,
-                    September 10, 2:00 AM GMT+7
+                    {t('dashboard.subtitle', { email: store.email, time: 'Thursday, September 10, 2:00 AM GMT+7' })}
+
+                    <div
+                      className="referralButton"
+                      style={{ marginTop: '15px' }}
+                      onClick={() =>
+                        copyToClipBoard(window.location.hostname + `?utm_source=referral&utm_content=${store.email}`)
+                      }>
+                      {t('success.share_acion')}
+                    </div>
                   </TextAlignCenter>
                 </div>
               </div>
             </div>
 
             <div className="fancyBoxBase" style={{ marginTop: 24, marginBottom: 24 }}>
-              <span style={{ marginRight: 8 }}>👍</span>Want to join ZipSchool's Facebook Group where you can get
-              <b>bonus material, chat with teachers, and join smaller classes?</b>
-              <div className="referralButton">Join Facebook Group</div>
+              {/* <span style={{ marginRight: 8 }}>👍</span>Want to join ZipSchool's Facebook Group where you can get
+              <b> bonus material, chat with teachers, and join smaller classes?</b> */}
+              {t('dashboard.promote_group')}
+              <div
+                onClick={() => openInNewTab('https://www.facebook.com/groups/2924060617821426')}
+                className="referralButton">
+                {t('dashboard.promote_group_action')}
+              </div>
             </div>
             <div className="fancyBoxBase" style={{ marginTop: 24, marginBottom: 64 }}>
-              <span style={{ marginRight: 8 }}>❤️</span>Do you have friends with kids? Click the button below to copy
-              the link you can share with them to get them some free classes!
-              <div className="referralButton">Copy Link</div>
+              {t('dashboard.promote_share')}
+
+              <div className="referralButton" onClick={() => copyToClipBoard('link')}>
+                {t('dashboard.promote_group_share')}
+              </div>
             </div>
           </div>
         </div>
       </div>
     </>
-  );
+  ));
 }
 
 Dashboard.propTypes = {

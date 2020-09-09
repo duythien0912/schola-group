@@ -1,5 +1,6 @@
-import React, { memo } from 'react';
+import React, { memo, useContext } from 'react';
 import PropTypes from 'prop-types';
+import { useObserver } from 'mobx-react-lite';
 
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -7,11 +8,11 @@ import { createStructuredSelector } from 'reselect';
 
 import { useInjectReducer } from 'utils/inject-reducer';
 import { useInjectSaga } from 'utils/inject-saga';
-import Link from 'next/link';
+// import Link from 'next/link';
+import { Link } from '../../../i18n';
+// import { useRouter } from 'next/router';
+import { Router } from '../../../i18n';
 
-import Layout from 'components/Layout';
-import Features from 'components/Features';
-import Showcases from 'components/Showcases';
 import SelectLanguages from 'components/Header/SelectLanguages';
 import styled from '@emotion/styled';
 
@@ -19,6 +20,8 @@ import saga from './saga';
 import reducer from './reducer';
 import { getShowcases } from './actions';
 import { selectShowcases } from './selectors';
+
+import { userContext } from '../../context/user';
 
 const AWhite = styled('a')`
   color: white;
@@ -30,6 +33,7 @@ const AWhite = styled('a')`
 
 const LogoImage = styled('img')`
   height: 70px;
+  cursor: pointer;
 `;
 
 const list_topic = [
@@ -55,8 +59,26 @@ const list_topic = [
 export function Home({ getShowcases, showcasesData, t }) {
   useInjectSaga({ key: 'showcases', saga });
   useInjectReducer({ key: 'showcases', reducer });
+  // const router = useRouter();
 
-  return (
+  // const [email, setEmail] = useState('');
+
+  // const onClickStartButton = () => {
+  //   Router.push({
+  //     pathname: '/register',
+  //     query: { email: email },
+  //   });
+  // };
+
+  const store = useContext(userContext);
+  const onClickStartButton = () => {
+    Router.push({
+      pathname: '/register',
+      query: { email: store.email },
+    });
+  };
+
+  return useObserver(() => (
     <>
       <div>
         <div className="purpleBackground">
@@ -66,18 +88,25 @@ export function Home({ getShowcases, showcasesData, t }) {
               <Link href="/">
                 <LogoImage src="/static/images/logo.png" />
               </Link>
-              <AWhite href="https://schola.tv/app">
+              {/* <AWhite href="https://schola.tv/app">
                 <div className="loginButton">{t('login_action')}</div>
-              </AWhite>
+              </AWhite> */}
             </div>
             <div className="oneLinerText">{t('title')}</div>
             <div className="subtitle">{t('subtitle')}</div>
             <div className="ctaContainer">
-              <input type="text" placeholder={t('email.placeholder')} className="emailBox" />
-              <div className="startButton">
+              <input
+                // value={email}
+                value={store.email}
+                onChange={e => store.setEmail(e.target.value)}
+                type="text"
+                placeholder={t('email.placeholder')}
+                className="emailBox"
+              />
+              <div className="startButton" onClick={() => onClickStartButton()}>
                 <div>{t('start_button.text')}</div>
               </div>
-              <div style={{ marginBottom: 64 }}>
+              <div style={{ marginBottom: 32 }}>
                 <span className="cardRequired">{t('subtext')}</span>
               </div>
             </div>
@@ -107,12 +136,12 @@ export function Home({ getShowcases, showcasesData, t }) {
             {t('makewith')}
           </div>
           <div style={{ textAlign: 'center', color: 'white', marginTop: 16 }}>
-            <a href="https://ziphomeschool.webflow.io/privacy-policy" style={{ color: 'white' }}>
-              {t('privacy_policy')}
+            <a href="https://schola.tv/about_us" style={{ color: 'white' }}>
+              {t('about_us')}
             </a>
           </div>
           <div style={{ textAlign: 'center', color: 'white' }}>
-            <a href="https://ziphomeschool.webflow.io/terms-of-service" style={{ color: 'white' }}>
+            <a href="https://schola.tv/faq" style={{ color: 'white' }}>
               {t('terms_of_service')}
             </a>
           </div>
@@ -126,7 +155,7 @@ export function Home({ getShowcases, showcasesData, t }) {
        <Showcases onGetShowcases={getShowcases} data={showcasesData} />
      </Layout> */}
     </>
-  );
+  ));
 }
 
 const mapStateToProps = createStructuredSelector({

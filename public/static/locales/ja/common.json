@@ -3,6 +3,7 @@
   "es": "スペイン語",
   "ja": "日本人",
   "en": "英語",
+  "vi": "ベトナム語",
   "phrases": {
     "features": "特徴",
     "apiExample": "APIの例",
@@ -22,6 +23,7 @@
   "makewith": "☕でフロリダで作られました",
   "privacy_policy": "個人情報保護方針",
   "terms_of_service": "利用規約",
+  "about_us": "私たちに関しては",
   "register": {
     "title": "クラスへのサインアップ 😄",
     "subtitle_topic": "🚀 子供が興味を持っているトピックをタップします。好きなだけ選んでください！",
