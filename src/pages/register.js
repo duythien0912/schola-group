@@ -17,7 +17,7 @@ RegisterPage.propTypes = {
 };
 
 RegisterPage.getInitialProps = async () => ({
-  namespacesRequired: ['common', 'banner', 'features', 'register'],
+  namespacesRequired: ['common', 'banner', 'features'],
 });
 
 export default withTranslation('common')(RegisterPage);

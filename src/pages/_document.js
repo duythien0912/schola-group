@@ -12,14 +12,14 @@ class MyDocument extends Document {
   render() {
     return (
       <Html>
-        <Global
+        {/* <Global
           styles={css`
             ::selection {
               background-color: #26bd5a;
               color: #fff;
             }
           `}
-        />
+        /> */}
 
         <Head>
           <link rel="apple-touch-icon" sizes="180x180" href="/static/favicon/apple-touch-icon.png" />

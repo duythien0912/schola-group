@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import SelectLanguages from 'components/Header/SelectLanguages';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const AWhite = styled('a')`
   color: white;
@@ -38,6 +39,8 @@ const rowItem = [
 const rowTime = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 export function Register({ t }) {
+  const router = useRouter();
+
   const [topic, setTopic] = useState([]);
   const handleClickTopic = index => {
     const newselect = topic;
@@ -57,8 +60,23 @@ export function Register({ t }) {
     handleClick();
   };
 
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [password, setPassword] = useState('');
+
   const [count, setCount] = useState(0);
   const handleClick = () => setCount(count + 1);
+
+  const handleSubmit = evt => {
+    evt.preventDefault();
+    console.log(name);
+    console.log(email);
+    console.log(phone);
+    console.log(password);
+
+    router.push('/dashboard');
+  };
 
   return (
     <>
@@ -100,14 +118,39 @@ export function Register({ t }) {
             </div>
             <div className="smallMarginTop"></div>
             <div className="registerSectionTitle smallMarginTop">{t('register.label_name')}</div>
-            <input type="text" className="fontSize18 fullWidth" placeholder={t('register.placeholder_name')} />
+            <input
+              value={name}
+              onChange={e => setName(e.target.value)}
+              type="text"
+              className="fontSize18 fullWidth"
+              placeholder={t('register.placeholder_name')}
+            />
             <div className="registerSectionTitle smallMarginTop">{t('register.label_email')}</div>
-            <input type="text" className="fontSize18 fullWidth" placeholder={t('register.placeholder_email')} />
+            <input
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              type="text"
+              className="fontSize18 fullWidth"
+              placeholder={t('register.placeholder_email')}
+            />
             <div className="registerSectionTitle smallMarginTop">{t('register.label_phone')}</div>
-            <input type="tel" className="fontSize18 fullWidth" placeholder={t('register.placeholder_phone')} />
+            <input
+              value={phone}
+              onChange={e => setPhone(e.target.value)}
+              type="tel"
+              className="fontSize18 fullWidth"
+              placeholder={t('register.placeholder_phone')}
+            />
             <div className="registerSectionTitle smallMarginTop">{t('register.label_password')}</div>
-            <input className="fontSize18 fullWidth" type="password" />
-            <div className="registerButton">{t('register.button_action')}</div>
+            <input
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              className="fontSize18 fullWidth"
+              type="password"
+            />
+            <button type="button" onClick={handleSubmit} className="registerButton">
+              {t('register.button_action')}
+            </button>
             <div style={{ textAlign: 'left', color: 'white' }}>
               <SelectLanguages />
             </div>
