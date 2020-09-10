@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Register from '../containers/register';
+import Register from '../containers/Register';
 import { withTranslation } from 'utils/with-i18next';
 
 export class RegisterPage extends React.PureComponent {
