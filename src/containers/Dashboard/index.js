@@ -6,6 +6,8 @@ import { Link } from '../../../i18n';
 // import { useRouter } from 'next/router';
 import { userContext } from '../../context/user';
 import { useObserver } from 'mobx-react-lite';
+import { SelectLanguages } from '../../components/Header/SelectLanguages';
+import { gtagEvent } from '../../lib/gtag';
 
 const LogoImage = styled('img')`
   height: 70px;
@@ -106,7 +108,13 @@ export function Dashboard({ t }) {
       await navigator.clipboard.writeText(copyMe);
       setCopySuccess(true);
       alert('Copy Success');
-      console.log(copySuccess);
+      console.log(copyMe);
+      gtagEvent({
+        action: 'user_copy_clipboard',
+        category: 'Times',
+        label: store.email,
+        value: copyMe,
+      });
     } catch (err) {
       setCopySuccess(false);
     }
@@ -135,7 +143,9 @@ export function Dashboard({ t }) {
               </Link>
               {/* <AWhite href="https://schola.tv/app">
                 <div className="loginButton">{t('login_action')}</div>
+
               </AWhite> */}
+              <SelectLanguages t={t} />
             </div>
             <div className="exploreClassesTitle">{t('dashboard.title')}</div>
             <div className="welcomeText">{t('dashboard.subtitle', { name: store.name })}</div>
@@ -161,7 +171,15 @@ export function Dashboard({ t }) {
                   </div>
                   <button
                     type="button"
-                    onClick={e => setModelOpen(true)}
+                    onClick={e => {
+                      gtagEvent({
+                        action: 'user_book_class',
+                        category: 'Book',
+                        label: store.email,
+                        value: item,
+                      });
+                      setModelOpen(true);
+                    }}
                     className="bookNowButton "
                     style={{ opacity: 1 }}>
                     {item.action.title}
@@ -194,7 +212,6 @@ export function Dashboard({ t }) {
                 </div>
               </div>
             </div>
-
             <div className="fancyBoxBase" style={{ marginTop: 24, marginBottom: 24 }}>
               {/* <span style={{ marginRight: 8 }}>👍</span>Want to join ZipSchool's Facebook Group where you can get
               <b> bonus material, chat with teachers, and join smaller classes?</b> */}
@@ -208,7 +225,11 @@ export function Dashboard({ t }) {
             <div className="fancyBoxBase" style={{ marginTop: 24, marginBottom: 64 }}>
               {t('dashboard.promote_share')}
 
-              <div className="referralButton" onClick={() => copyToClipBoard('link')}>
+              <div
+                className="referralButton"
+                onClick={() =>
+                  copyToClipBoard(window.location.hostname + `?utm_source=referral&utm_content=${store.email}`)
+                }>
                 {t('dashboard.promote_group_share')}
               </div>
             </div>

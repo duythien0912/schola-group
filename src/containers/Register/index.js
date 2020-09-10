@@ -9,6 +9,7 @@ import { Router } from '../../../i18n';
 
 import { userContext } from '../../context/user';
 import { useObserver } from 'mobx-react-lite';
+import { gtagEvent } from '../../lib/gtag';
 
 const AWhite = styled('a')`
   color: white;
@@ -47,33 +48,42 @@ const rowTime = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday
 export function Register({ t }) {
   // const router = useRouter();
 
-  const [topic, setTopic] = useState([]);
+  const store = useContext(userContext);
+
   const handleClickTopic = index => {
-    const newselect = topic;
+    const newselect = store.topics;
     const indexOfItem = newselect.indexOf(rowItem[index]);
     indexOfItem === -1 ? newselect.push(rowItem[index]) : newselect.splice(indexOfItem, 1);
-    setTopic(newselect);
-    console.log(newselect);
-    handleClick();
+    store.setTopics(newselect);
+    gtagEvent({
+      action: 'user_select_topic',
+      category: 'Topics',
+      label: store.email,
+      value: newselect,
+    });
   };
 
-  const [time, setTime] = useState([]);
   const handleClickTime = index => {
-    const newTime = time;
+    const newTime = store.times;
     const indexOfItem = newTime.indexOf(rowTime[index]);
     indexOfItem === -1 ? newTime.push(rowTime[index]) : newTime.splice(indexOfItem, 1);
-    setTime(newTime);
-    console.log(newTime);
-    handleClick();
+    store.setTimes(newTime);
+    gtagEvent({
+      action: 'user_select_time',
+      category: 'Times',
+      label: store.email,
+      value: newTime,
+    });
   };
-
-  const [count, setCount] = useState(0);
-  const handleClick = () => setCount(count + 1);
-
-  const store = useContext(userContext);
 
   const handleSubmit = evt => {
     evt.preventDefault();
+    gtagEvent({
+      action: 'submit_register_form',
+      category: 'Register',
+      label: store.email,
+      value: store.getData(),
+    });
     Router.push('/dashboard');
   };
 
@@ -94,16 +104,17 @@ export function Register({ t }) {
               </Link>
               {/* <AWhite href="https://schola.tv/app">
                 <div className="loginButton">{t('login_action')}</div>
-              </AWhite> */}
-            </div>
 
+              </AWhite> */}
+              <SelectLanguages />
+            </div>
             <div className="registerHeader">{t('register.title')}</div>
             <div className="registerSectionTitle smallMarginTop">{t('register.subtitle_topic')}</div>
             <div className="rowContainer">
               {rowItem.map((item, index) => (
                 <div
                   key={'rowItem_' + index}
-                  className={`rowItem ${topic.includes(item) ? ' selectedRowItem' : ''}`}
+                  className={`rowItem ${store.topics.includes(item) ? ' selectedRowItem' : ''}`}
                   onClick={() => handleClickTopic(index)}>
                   {item}
                 </div>
@@ -114,7 +125,7 @@ export function Register({ t }) {
               {rowTime.map((item, index) => (
                 <div
                   key={'rowTime_' + index}
-                  className={`rowItem ${time.includes(item) ? ' selectedRowItem' : ''}`}
+                  className={`rowItem ${store.times.includes(item) ? ' selectedRowItem' : ''}`}
                   onClick={() => handleClickTime(index)}>
                   {item}
                 </div>
@@ -155,9 +166,9 @@ export function Register({ t }) {
             <button type="button" onClick={handleSubmit} className="registerButton">
               {t('register.button_action')}
             </button>
-            <div style={{ textAlign: 'left', color: 'white' }}>
+            {/* <div style={{ textAlign: 'left', color: 'white' }}>
               <SelectLanguages />
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

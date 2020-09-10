@@ -7,9 +7,17 @@ import styled from '@emotion/styled';
 import { i18n } from 'utils/with-i18next';
 
 const SelectRoot = styled('select')`
-  border-radius: 4px;
-  width: 100px;
-  margin-top: 12px;
+  border: 1px solid #fff;
+  cursor: pointer;
+  border-radius: 5px;
+  background: transparent;
+  color: white;
+  font-size: 1.03rem;
+  box-shadow: none;
+  margin: 0px;
+  text-align: center;
+  text-align-last: center;
+  -moz-text-align-last: center;
 `;
 
 export function SelectLanguages({ t }) {
@@ -26,11 +34,13 @@ export function SelectLanguages({ t }) {
   };
 
   return (
-    <SelectRoot name="languages" id="languages" value={select} onChange={handleSelect}>
-      <option value="en">{t('en')}</option>
-      <option value="vi">{t('vi')}</option>
-      <option value="ja">{t('ja')}</option>
-    </SelectRoot>
+    <div className="dropdown-container">
+      <SelectRoot name="languages" id="languages" value={select} onChange={handleSelect}>
+        <option value="en">{t('en')}</option>
+        <option value="vi">{t('vi')}</option>
+        <option value="ja">{t('ja')}</option>
+      </SelectRoot>
+    </div>
   );
 }
 

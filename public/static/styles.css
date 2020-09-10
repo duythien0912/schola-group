@@ -572,7 +572,7 @@ img {
     margin-top: 16px;
     color: #fff;
     font-weight: 700;
-    margin-bottom: 10px
+    margin-bottom: 64px
 }
 
 .exploreClassesTitle {
@@ -829,6 +829,7 @@ img {
     color: black;
     background: none;
 }
+
 *:focus {
     outline: none;
 }
@@ -836,6 +837,7 @@ img {
 .modal-close:focus {
     background: none;
 }
+
 .model-window_true {
     visibility: visible;
     opacity: 1;
@@ -862,4 +864,20 @@ img {
 
 .model_true {
     animation: tada 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* apply CSS to the select tag of  
+         .dropdown-container div*/
+
+.dropdown-container select {
+    /* for Firefox */
+    -moz-appearance: none;
+    /* for Safari, Chrome, Opera */
+    -webkit-appearance: none;
+}
+
+/* for IE10 */
+
+.dropdown-container select::-ms-expand {
+    display: none;
 }

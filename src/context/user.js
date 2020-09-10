@@ -10,11 +10,14 @@ export const UserProvider = ({ children }) => {
     name: '',
     phone: '',
     topics: [],
+    times: [],
     getData() {
       return {
         email: store.email,
         name: store.email,
         phone: store.email,
+        topics: store.topics,
+        times: store.times,
       };
     },
     setEmail(val) {
@@ -25,6 +28,12 @@ export const UserProvider = ({ children }) => {
     },
     setPhone(val) {
       store.phone = val;
+    },
+    setTopics(val) {
+      store.topics = val;
+    },
+    setTimes(val) {
+      store.times = val;
     },
     // setData(val) {
     //   store.data = val;

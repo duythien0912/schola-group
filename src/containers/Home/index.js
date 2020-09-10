@@ -22,6 +22,7 @@ import { getShowcases } from './actions';
 import { selectShowcases } from './selectors';
 
 import { userContext } from '../../context/user';
+import { gtagEvent } from '../../lib/gtag';
 
 const AWhite = styled('a')`
   color: white;
@@ -54,6 +55,31 @@ const list_topic = [
     subtitle: 'Have your child learn about how astronauts live in space!',
     action: 'Book Now',
   },
+  {
+    image: {
+      src: 'https://i.pinimg.com/originals/5d/3e/94/5d3e9462d91d43e0e76427d8b613e8c1.gif',
+    },
+    title: 'Culture and Travel 🇺🇳',
+    subtitle: 'Have your child learn more about Culture and Travel!',
+    action: 'Book Now',
+  },
+  {
+    image: {
+      src:
+        'https://media2.giphy.com/media/vrKUtJNMtB3Y4/giphy.gif?cid=ecf05e4701bc25301bd6c3e574599853c6a432a33a61a127&rid=giphy.gif',
+    },
+    title: 'Dinosaurs 🦕',
+    subtitle: 'Have your child learn more about the dinosaurs!',
+    action: 'Book Now',
+  },
+  {
+    image: {
+      src: 'https://media1.giphy.com/media/LmNwrBhejkK9EFP504/giphy.gif',
+    },
+    title: 'Technology, Coding and Games 👩‍💻',
+    subtitle: 'Have your child learn more about Technology, Coding and Games!',
+    action: 'Book Now',
+  },
 ];
 
 export function Home({ getShowcases, showcasesData, t }) {
@@ -72,6 +98,13 @@ export function Home({ getShowcases, showcasesData, t }) {
 
   const store = useContext(userContext);
   const onClickStartButton = () => {
+    gtagEvent({
+      action: 'submit_home_form',
+      category: 'Start',
+      label: store.email,
+      value: store.getData(),
+    });
+
     Router.push({
       pathname: '/register',
       query: { email: store.email },
@@ -90,7 +123,9 @@ export function Home({ getShowcases, showcasesData, t }) {
               </Link>
               {/* <AWhite href="https://schola.tv/app">
                 <div className="loginButton">{t('login_action')}</div>
+
               </AWhite> */}
+              <SelectLanguages />
             </div>
             <div className="oneLinerText">{t('title')}</div>
             <div className="subtitle">{t('subtitle')}</div>
@@ -126,7 +161,7 @@ export function Home({ getShowcases, showcasesData, t }) {
             </div>
           ))}
 
-          <div
+          {/* <div
             style={{
               textAlign: 'center',
               color: 'white',
@@ -134,8 +169,8 @@ export function Home({ getShowcases, showcasesData, t }) {
               marginBottom: 32,
             }}>
             {t('makewith')}
-          </div>
-          <div style={{ textAlign: 'center', color: 'white', marginTop: 16 }}>
+          </div> */}
+          <div style={{ textAlign: 'center', color: 'white', marginTop: 64 }}>
             <a href="https://schola.tv/about_us" style={{ color: 'white' }}>
               {t('about_us')}
             </a>
@@ -144,9 +179,6 @@ export function Home({ getShowcases, showcasesData, t }) {
             <a href="https://schola.tv/faq" style={{ color: 'white' }}>
               {t('terms_of_service')}
             </a>
-          </div>
-          <div style={{ textAlign: 'center', color: 'white' }}>
-            <SelectLanguages />
           </div>
         </div>
       </div>
