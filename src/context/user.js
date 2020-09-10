@@ -11,11 +11,12 @@ export const UserProvider = ({ children }) => {
     phone: '',
     topics: [],
     times: [],
+    error: '',
     getData() {
       return {
         email: store.email,
-        name: store.email,
-        phone: store.email,
+        name: store.name,
+        phone: store.phone,
         topics: store.topics,
         times: store.times,
       };
@@ -34,6 +35,9 @@ export const UserProvider = ({ children }) => {
     },
     setTimes(val) {
       store.times = val;
+    },
+    setError(val) {
+      store.error = val;
     },
     // setData(val) {
     //   store.data = val;

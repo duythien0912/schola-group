@@ -1,4 +1,4 @@
-const GA_TRACKING_ID = '<YOUR_GA_TRACKING_ID>';
+const GA_TRACKING_ID = 'UA-84948227-1';
 
 // https://developers.google.com/analytics/devguides/collection/gtagjs/pages
 const gtagPageview = url => {

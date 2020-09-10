@@ -565,9 +565,9 @@ img {
 .registerButton {
     cursor: pointer;
     background: #5A5BD3;
-    width: 150px;
+    /* width: 150px; */
     text-align: center;
-    padding: 8px;
+    padding: 8px 12px;
     border-radius: 4px;
     margin-top: 16px;
     color: #fff;

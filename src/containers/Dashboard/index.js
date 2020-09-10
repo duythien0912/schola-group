@@ -8,6 +8,7 @@ import { userContext } from '../../context/user';
 import { useObserver } from 'mobx-react-lite';
 import { SelectLanguages } from '../../components/Header/SelectLanguages';
 import { gtagEvent } from '../../lib/gtag';
+import { Router } from '../../../i18n';
 
 const LogoImage = styled('img')`
   height: 70px;
@@ -103,14 +104,14 @@ export function Dashboard({ t }) {
   const [modelOpen, setModelOpen] = useState(false);
   const [copySuccess, setCopySuccess] = useState(false);
 
-  const copyToClipBoard = async copyMe => {
+  const copyToClipBoard = async (copyMe, from) => {
     try {
       await navigator.clipboard.writeText(copyMe);
       setCopySuccess(true);
       alert('Copy Success');
       console.log(copyMe);
       gtagEvent({
-        action: 'user_copy_clipboard',
+        action: `user_copy_clipboard_${from}`,
         category: 'Times',
         label: store.email,
         value: copyMe,
@@ -129,6 +130,12 @@ export function Dashboard({ t }) {
 
   useEffect(() => {
     console.log(store.getData());
+    if (!store.email) {
+      Router.push({
+        pathname: '/register',
+        query: { email: store.email },
+      });
+    }
   }, [store]);
 
   return useObserver(() => (
@@ -148,7 +155,7 @@ export function Dashboard({ t }) {
               <SelectLanguages t={t} />
             </div>
             <div className="exploreClassesTitle">{t('dashboard.title')}</div>
-            <div className="welcomeText">{t('dashboard.subtitle', { name: store.name })}</div>
+            <div className="welcomeText">{t('dashboard.subtitle', { name: store.name || store.email })}</div>
             <div className="allClassesContainer">
               {groupClass.map((item, index) => (
                 <div key={`classContainer_${index}`} className="classContainer">
@@ -204,7 +211,10 @@ export function Dashboard({ t }) {
                       className="referralButton"
                       style={{ marginTop: '15px' }}
                       onClick={() =>
-                        copyToClipBoard(window.location.hostname + `?utm_source=referral&utm_content=${store.email}`)
+                        copyToClipBoard(
+                          window.location.hostname + `?utm_source=referral&utm_content=${store.email}`,
+                          'model'
+                        )
                       }>
                       {t('success.share_acion')}
                     </div>
@@ -216,6 +226,11 @@ export function Dashboard({ t }) {
               {/* <span style={{ marginRight: 8 }}>👍</span>Want to join ZipSchool's Facebook Group where you can get
               <b> bonus material, chat with teachers, and join smaller classes?</b> */}
               {t('dashboard.promote_group')}
+              <ul>
+                <li>{t('dashboard.promote_group_li.0')}</li>
+                <li>{t('dashboard.promote_group_li.1')}</li>
+                <li>{t('dashboard.promote_group_li.2')}</li>
+              </ul>
               <div
                 onClick={() => openInNewTab('https://www.facebook.com/groups/2924060617821426')}
                 className="referralButton">
@@ -228,7 +243,10 @@ export function Dashboard({ t }) {
               <div
                 className="referralButton"
                 onClick={() =>
-                  copyToClipBoard(window.location.hostname + `?utm_source=referral&utm_content=${store.email}`)
+                  copyToClipBoard(
+                    window.location.hostname + `?utm_source=referral&utm_content=${store.email}`,
+                    'fotter'
+                  )
                 }>
                 {t('dashboard.promote_group_share')}
               </div>

@@ -3,7 +3,7 @@
   "es": "Spanish",
   "ja": "Japanese",
   "en": "English",
-  "vi": "VietNamese",
+  "vi": "Vietnamese",
   "phrases": {
     "features": "Features",
     "apiExample": "API example",
@@ -40,16 +40,24 @@
   "dashboard": {
     "title": "Upcoming Live Classes 🔍",
     "subtitle": "Hi there, asdsad. Hope you're having an awesome day. Go ahead and book some classes!",
-    "promote_group": "👍 Want to join ZipSchool's Facebook Group where you can getbonus material, chat with teachers, and join smaller classes?",
+    "promote_group": "👍 Join Schola's Facebook Group where you can get",
+    "promote_group_li": {
+      "0": "Bonus material",
+      "1": "Chat with teachers",
+      "2": "Join smaller classes"
+    },
     "promote_group_action": "Join Facebook Group",
-    "promote_share": "❤️Do you have friends with kids? Click the button below to copy the link you can share with them to get them some free classes!",
+    "promote_share": "❤️ Have friends with kids? Click the button below to share with your friends and get more some free classes!",
     "promote_group_share": "Copy Link"
   },
   "success": {
     "title": "Success!",
     "subtitle": "Yay! You're all set. We sent an email to {{email}} with more info. See you on {{time}}",
-    "share_acion": "Share With Your Friend",
+    "share_acion": "Share with your friends and get more free classes",
     "share_subtitle": "",
     "close_action": "close"
+  },
+  "error": {
+    "email": "Email can't be blank"
   }
 }

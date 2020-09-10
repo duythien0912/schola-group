@@ -5,6 +5,7 @@ import { withTranslation } from 'utils/with-i18next';
 import styled from '@emotion/styled';
 
 import { i18n } from 'utils/with-i18next';
+import { gtagEvent } from '../../lib/gtag';
 
 const SelectRoot = styled('select')`
   border: 1px solid #fff;
@@ -29,6 +30,11 @@ export function SelectLanguages({ t }) {
 
   const handleSelect = ev => {
     ev.preventDefault();
+    gtagEvent({
+      action: 'user_change_language',
+      category: 'Language',
+      value: ev.target.value,
+    });
 
     setSelect(ev.target.value);
   };

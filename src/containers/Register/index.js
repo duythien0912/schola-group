@@ -84,6 +84,10 @@ export function Register({ t }) {
       label: store.email,
       value: store.getData(),
     });
+    if (!store.email) {
+      store.setError('email error');
+      return alert(t('error.email'));
+    }
     Router.push('/dashboard');
   };
 
@@ -144,7 +148,7 @@ export function Register({ t }) {
             <input
               value={store.email}
               onChange={e => store.setEmail(e.target.value)}
-              type="text"
+              type="email"
               className="fontSize18 fullWidth"
               placeholder={t('register.placeholder_email')}
             />
