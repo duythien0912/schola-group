@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Home from 'containers/Home';
+import Home from '../containers/Home';
 import { withTranslation } from 'utils/with-i18next';
 
 export class IndexPage extends React.PureComponent {

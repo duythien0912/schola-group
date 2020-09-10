@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Success from 'containers/Success';
+import Success from '../containers/Success';
 import { withTranslation } from 'utils/with-i18next';
 
 export class SuccessPage extends React.PureComponent {

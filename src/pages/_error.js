@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { withTranslation } from 'utils/with-i18next';
 import { Global, css } from '@emotion/core';
 
-import Svg404 from 'containers/404';
+import Svg404 from '../containers/404';
 
 export class ErrorPage extends React.PureComponent {
   render() {

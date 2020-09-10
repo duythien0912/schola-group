@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Dashboard from 'containers/Dashboard';
+import Dashboard from '../containers/Dashboard';
 import { withTranslation } from 'utils/with-i18next';
 
 export class DashboardPage extends React.PureComponent {

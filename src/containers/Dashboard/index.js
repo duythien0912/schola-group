@@ -180,7 +180,7 @@ export function Dashboard({ t }) {
                   </EmojiDiv>
                   <SuccessText>{t('success.title')}</SuccessText>
                   <TextAlignCenter>
-                    {t('dashboard.subtitle', { email: store.email, time: 'Thursday, September 10, 2:00 AM GMT+7' })}
+                    {t('success.subtitle', { email: store.email, time: 'Thursday, September 10, 2:00 AM GMT+7' })}
 
                     <div
                       className="referralButton"
