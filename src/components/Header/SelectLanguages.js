@@ -1,10 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { withTranslation } from 'utils/with-i18next';
-
 import styled from '@emotion/styled';
-
-import { i18n } from 'utils/with-i18next';
+import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import { i18n, withTranslation } from 'utils/with-i18next';
 import { gtagEvent } from '../../lib/gtag';
 
 const SelectRoot = styled('select')`

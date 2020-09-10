@@ -1,16 +1,14 @@
-import React, { useState, useEffect, useContext } from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import SelectLanguages from 'components/Header/SelectLanguages';
-// import Link from 'next/link';
-import { Link } from '../../../i18n';
-// import { useRouter } from 'next/router';
-import { Router } from '../../../i18n';
-
-import { userContext } from '../../context/user';
 import { useObserver } from 'mobx-react-lite';
-import { gtagEvent } from '../../lib/gtag';
+import PropTypes from 'prop-types';
+import React, { useContext, useEffect, useState } from 'react';
+import { i18n } from 'utils/with-i18next';
+// import Link from 'next/link';
+import { Link, Router } from '../../../i18n';
+import { userContext } from '../../context/user';
 import { PostData } from '../../lib/api';
+import { gtagEvent } from '../../lib/gtag';
 
 const AWhite = styled('a')`
   color: white;
@@ -50,6 +48,7 @@ export function Register({ t }) {
   // const router = useRouter();
 
   const store = useContext(userContext);
+  const [select, setSelect] = useState(i18n.language);
 
   const handleClickTopic = index => {
     const newselect = store.topics;
@@ -91,12 +90,12 @@ export function Register({ t }) {
     }
 
     try {
-      var student = await PostData('/lg/students', {
+      var student = await PostData(`/lg/students?lang=${select}`, {
         studentName: store.name,
         studentEmail: store.email,
         studentPhone: store.phone,
-        tags: [{ tagId: 3 }, { tagId: 2 }],
-        times: [store.times],
+        tags: [1, 2],
+        times: store.times,
       });
 
       if (student.studentId) {

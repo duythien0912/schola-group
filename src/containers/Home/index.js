@@ -1,28 +1,23 @@
-import React, { memo, useContext } from 'react';
-import PropTypes from 'prop-types';
+import styled from '@emotion/styled';
+import SelectLanguages from 'components/Header/SelectLanguages';
 import { useObserver } from 'mobx-react-lite';
-
-import { compose } from 'redux';
+import PropTypes from 'prop-types';
+import React, { memo, useContext, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
-
 import { useInjectReducer } from 'utils/inject-reducer';
 import { useInjectSaga } from 'utils/inject-saga';
+import { i18n } from 'utils/with-i18next';
 // import Link from 'next/link';
-import { Link } from '../../../i18n';
-// import { useRouter } from 'next/router';
-import { Router } from '../../../i18n';
-
-import SelectLanguages from 'components/Header/SelectLanguages';
-import styled from '@emotion/styled';
-
-import saga from './saga';
-import reducer from './reducer';
-import { getShowcases } from './actions';
-import { selectShowcases } from './selectors';
-
+import { Link, Router } from '../../../i18n';
 import { userContext } from '../../context/user';
+import { FetchData } from '../../lib/api';
 import { gtagEvent } from '../../lib/gtag';
+import { getShowcases } from './actions';
+import reducer from './reducer';
+import saga from './saga';
+import { selectShowcases } from './selectors';
 
 const AWhite = styled('a')`
   color: white;
@@ -111,6 +106,16 @@ export function Home({ getShowcases, showcasesData, t }) {
     });
   };
 
+  const [select, setSelect] = useState(i18n.language);
+
+  useEffect(() => {
+    async function fetchData() {
+      var topics = await FetchData(`/lg/tags/super?lang=${select}`);
+      store.setHomeTopic(topics);
+    }
+    fetchData();
+  }, [store, select]);
+
   return useObserver(() => (
     <>
       <div>
@@ -146,16 +151,19 @@ export function Home({ getShowcases, showcasesData, t }) {
               </div>
             </div>
           </div>
-          {list_topic.map((topic, index) => (
-            <div key={'topic' + index} className="fancyBoxBase marginBottom">
+          {/* {list_topic.map((topic, index) => ( */}
+          {store.homeTopic.map((topic, index) => (
+            <div key={'topic_' + index + '_' + topic.tagId} className="fancyBoxBase marginBottom">
               <div className="sessionInfo">
-                <img src={topic.image.src} className="sessionImage" />
+                <img src={topic.image} className="sessionImage" />
                 <div className="classInfoContainer">
-                  <h3>{topic.title}</h3>
-                  <p>{topic.subtitle}</p>
-                  <Link href={`/register?topic=${topic.title}`}>
-                    <div className="learnMore">{topic.action}</div>
-                  </Link>
+                  <h3>{topic.tagName}</h3>
+                  <p>{topic.tagDesc}</p>
+                  {topic.tagAction == 'Loading' ? null : (
+                    <Link href={`/register?topic=${topic.tagName}`}>
+                      <div className="learnMore">{topic.tagAction}</div>
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>

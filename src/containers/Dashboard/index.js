@@ -1,14 +1,13 @@
-import React, { useState, useEffect, useContext } from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-// import Link from 'next/link';
-import { Link } from '../../../i18n';
-// import { useRouter } from 'next/router';
-import { userContext } from '../../context/user';
 import { useObserver } from 'mobx-react-lite';
+import PropTypes from 'prop-types';
+import React, { useContext, useEffect, useState } from 'react';
+import { i18n } from 'utils/with-i18next';
+import { Link, Router } from '../../../i18n';
 import { SelectLanguages } from '../../components/Header/SelectLanguages';
+import { userContext } from '../../context/user';
+import { FetchData, PostData } from '../../lib/api';
 import { gtagEvent } from '../../lib/gtag';
-import { Router } from '../../../i18n';
 
 const LogoImage = styled('img')`
   height: 70px;
@@ -128,6 +127,8 @@ export function Dashboard({ t }) {
 
   const store = useContext(userContext);
 
+  const [select, setSelect] = useState(i18n.language);
+
   useEffect(() => {
     console.log(store.getData());
     if (!store.email) {
@@ -136,7 +137,13 @@ export function Dashboard({ t }) {
         query: { email: store.email },
       });
     }
-  }, [store]);
+
+    async function fetchData() {
+      var schedules = await FetchData(`/lg/schedules?lang=${select}`);
+      store.setLesson(schedules);
+    }
+    fetchData();
+  }, [store, select]);
 
   return useObserver(() => (
     <>
@@ -157,39 +164,57 @@ export function Dashboard({ t }) {
             <div className="exploreClassesTitle">{t('dashboard.title')}</div>
             <div className="welcomeText">{t('dashboard.subtitle', { name: store.name || store.email })}</div>
             <div className="allClassesContainer">
-              {groupClass.map((item, index) => (
+              {store.lessons.map((item, index) => (
                 <div key={`classContainer_${index}`} className="classContainer">
-                  <div className="classTitle">{item.title}</div>
+                  <div className="classTitle">{item.topic.title}</div>
                   <div className="tagsContainer">
-                    {item.tags.map((tag, index2) => (
+                    {item.topic.tags.map((tag, index2) => (
                       <div
                         key={`tag_${index}_${index2}`}
                         className={`tag`}
                         style={{ background: tag.type == 0 ? 'rgb(227, 204, 255)' : '#ffd8fc' }}>
-                        {tag.name}
+                        {tag.tagName}
                       </div>
                     ))}
+                    {item.scheduleDate ? (
+                      <div className={`tag`} style={{ background: 'rgb(227, 204, 255)' }}>
+                        {/* {item.scheduleDate} */}
+                        {new Date(item.scheduleDate).toLocaleString()}
+                      </div>
+                    ) : (
+                      ''
+                    )}
                   </div>
                   <div className="classText" style={{ marginTop: 16, marginBottom: 16 }} />
-                  <img className="classImg" src={item.image.src} />
-                  <div className="teacherContainer">
-                    <img src={item.teacher.teacherImage.src} className="teacherImg" />
-                    <div className="teacherName">{item.teacher.teacherName}</div>
-                  </div>
+                  <img className="classImg" src={item.topic.image} />
+                  {item.topic.teacher && item.topic.teacher.teacherName != 'Loading' ? (
+                    <div className="teacherContainer">
+                      <img src={item.topic.teacher.avatar} className="teacherImg" />
+                      <div className="teacherName">{item.topic.teacher.teacherName}</div>
+                    </div>
+                  ) : (
+                    ''
+                  )}
+
                   <button
                     type="button"
-                    onClick={e => {
+                    onClick={async e => {
+                      e.preventDefault();
                       gtagEvent({
                         action: 'user_book_class',
                         category: 'Book',
                         label: store.email,
                         value: item,
                       });
+                      await PostData(`/lg/schedules/${item.scheduleId}/apply?lang=${select}`, {
+                        studentId: store.id,
+                      });
+
                       setModelOpen(true);
                     }}
                     className="bookNowButton "
                     style={{ opacity: 1 }}>
-                    {item.action.title}
+                    {item.topic.topicAction ?? 'Book Now'}
                   </button>
                 </div>
               ))}
@@ -228,8 +253,6 @@ export function Dashboard({ t }) {
               </div>
             </div>
             <div className="fancyBoxBase" style={{ marginTop: 24, marginBottom: 24 }}>
-              {/* <span style={{ marginRight: 8 }}>👍</span>Want to join ZipSchool's Facebook Group where you can get
-              <b> bonus material, chat with teachers, and join smaller classes?</b> */}
               {t('dashboard.promote_group')}
               <ul>
                 <li>{t('dashboard.promote_group_li.0')}</li>

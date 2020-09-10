@@ -103,7 +103,7 @@ export function Success({ t }) {
               <p className="title">Success!</p>
               <p className="text">
                 Yay! You're all set. We sent an email to asdas@asds.asdasd with more info. Please share Zip with your
-                friends on Facebook it'll help us a lot. See you on Thursday, September 10, 2:00 AM GMT+7{' '}
+                friends on Facebook it'll help us a lot. See you on Thursday, September 10, 2:00 AM GMT+7
               </p>
               <Link href="/">
                 <ShareButton type="button">Share with friend</ShareButton>
