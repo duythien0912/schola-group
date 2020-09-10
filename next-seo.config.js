@@ -1,22 +1,22 @@
 export default {
-  title: 'React Next Boilerplate',
+  title: 'Schola Live for Kids',
   description:
-    'A basis for reducing the configuration of your projects with nextJS, best development practices and popular libraries in the developer community.',
+    'Learn coding, science and math topics Live! Connect with top teachers who are experienced and fun - qualified teachers, experienced engineers and fellow students to learn and practice HTML, CSS, JavaScript, etc, and explore the world!',
   openGraph: {
-    url: 'https://github.com/react-next-boilerplate/react-next-boilerplate',
-    title: 'React Next Boilerplate',
+    url: 'https://schola.tv',
+    title: 'Schola Live for Kids',
     description:
-      'A basis for reducing the configuration of your projects with nextJS, best development practices and popular libraries in the developer community.',
+      'Learn coding, science and math topics Live! Connect with top teachers who are experienced and fun - qualified teachers, experienced engineers and fellow students to learn and practice HTML, CSS, JavaScript, etc, and explore the world!',
     images: [
       {
         url:
-          'https://raw.githubusercontent.com/react-next-boilerplate/react-next-boilerplate/master/docs/images/Preview.png',
+          'https://schola.tv/wp-content/uploads/2019/01/fb-size-cover.png',
         width: 1012,
         height: 506,
-        alt: 'React Next Boilerplate',
+        alt: 'Schola Live for Kids',
       },
     ],
-    site_name: 'React Next Boilerplate',
+    site_name: 'Schola Live for Kids',
   },
   twitter: {
     handle: '@wootsbot',

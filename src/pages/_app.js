@@ -18,7 +18,7 @@ class Srr extends App {
     return (
       <React.Fragment>
         <Head>
-          <title>React Next Boilerplate</title>
+          <title>Schola Live for Kids</title>
         </Head>
 
         <Provider store={reduxStore}>
