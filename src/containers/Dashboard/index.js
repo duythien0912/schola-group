@@ -218,6 +218,11 @@ export function Dashboard({ t }) {
                       }>
                       {t('success.share_acion')}
                     </div>
+                    <div
+                      onClick={() => openInNewTab('https://www.facebook.com/groups/2924060617821426')}
+                      className="referralText">
+                      {t('dashboard.promote_group_action')}
+                    </div>
                   </TextAlignCenter>
                 </div>
               </div>
@@ -239,7 +244,6 @@ export function Dashboard({ t }) {
             </div>
             <div className="fancyBoxBase" style={{ marginTop: 24, marginBottom: 64 }}>
               {t('dashboard.promote_share')}
-
               <div
                 className="referralButton"
                 onClick={() =>

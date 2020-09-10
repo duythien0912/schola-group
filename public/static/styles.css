@@ -575,6 +575,12 @@ img {
     margin-bottom: 64px
 }
 
+.referralText{
+    margin-top: 1em;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 .exploreClassesTitle {
     font-size: 28px;
     color: #fff;
@@ -790,6 +796,7 @@ img {
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     padding: 2em;
+    padding-bottom: 1em;
     background: #ffffff;
     display: flex;
     flex-direction: column;

@@ -40,7 +40,7 @@ const LogoImage = styled('img')`
 const list_topic = [
   {
     image: {
-      src: 'https://i.imgur.com/jCv9yNx.gif',
+      src: 'https://schola.tv/wp-content/uploads/2020/09/jCv9yNx.gif',
     },
     title: 'Art 🎨',
     subtitle: 'Have your child make some art with the guidance of a professional artist!',
@@ -57,7 +57,7 @@ const list_topic = [
   },
   {
     image: {
-      src: 'https://i.pinimg.com/originals/5d/3e/94/5d3e9462d91d43e0e76427d8b613e8c1.gif',
+      src: 'https://schola.tv/wp-content/uploads/2020/09/ezgif.com-optimize.gif',
     },
     title: 'Culture and Travel 🇺🇳',
     subtitle: 'Have your child learn more about Culture and Travel!',
