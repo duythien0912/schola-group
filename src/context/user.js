@@ -6,6 +6,7 @@ export const userContext = createContext();
 export const UserProvider = ({ children }) => {
   const store = useLocalStore(() => ({
     data: {},
+    id: '',
     email: '',
     name: '',
     phone: '',
@@ -14,12 +15,16 @@ export const UserProvider = ({ children }) => {
     error: '',
     getData() {
       return {
+        id: store.id,
         email: store.email,
         name: store.name,
         phone: store.phone,
         topics: store.topics,
         times: store.times,
       };
+    },
+    setId(val) {
+      store.id = val;
     },
     setEmail(val) {
       store.email = val;

@@ -134,7 +134,7 @@ export function Home({ getShowcases, showcasesData, t }) {
                 // value={email}
                 value={store.email}
                 onChange={e => store.setEmail(e.target.value)}
-                type="text"
+                type="email"
                 placeholder={t('email.placeholder')}
                 className="emailBox"
               />
@@ -153,7 +153,7 @@ export function Home({ getShowcases, showcasesData, t }) {
                 <div className="classInfoContainer">
                   <h3>{topic.title}</h3>
                   <p>{topic.subtitle}</p>
-                  <Link href="/register">
+                  <Link href={`/register?topic=${topic.title}`}>
                     <div className="learnMore">{topic.action}</div>
                   </Link>
                 </div>
@@ -170,13 +170,23 @@ export function Home({ getShowcases, showcasesData, t }) {
             }}>
             {t('makewith')}
           </div> */}
-          <div style={{ textAlign: 'center', color: 'white', marginTop: 64 }}>
+          {/* <div style={{ textAlign: 'center', color: 'white', marginTop: 64 }}>
             <a href="https://schola.tv/about_us" style={{ color: 'white' }}>
               {t('about_us')}
             </a>
           </div>
           <div style={{ textAlign: 'center', color: 'white' }}>
             <a href="https://schola.tv/faq" style={{ color: 'white' }}>
+              {t('terms_of_service')}
+            </a>
+          </div> */}
+          <div style={{ textAlign: 'center', color: 'white', marginTop: 64 }}>
+            <a href="#" style={{ color: 'white' }}>
+              {t('about_us')}
+            </a>
+          </div>
+          <div style={{ textAlign: 'center', color: 'white' }}>
+            <a href="#" style={{ color: 'white' }}>
               {t('terms_of_service')}
             </a>
           </div>

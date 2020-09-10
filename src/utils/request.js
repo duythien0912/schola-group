@@ -42,3 +42,5 @@ export default function request(url, options) {
     .then(checkStatus)
     .then(parseJSON);
 }
+
+export { request, checkStatus, parseJSON };

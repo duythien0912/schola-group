@@ -10,6 +10,7 @@ import { Router } from '../../../i18n';
 import { userContext } from '../../context/user';
 import { useObserver } from 'mobx-react-lite';
 import { gtagEvent } from '../../lib/gtag';
+import { PostData } from '../../lib/api';
 
 const AWhite = styled('a')`
   color: white;
@@ -76,7 +77,7 @@ export function Register({ t }) {
     });
   };
 
-  const handleSubmit = evt => {
+  const handleSubmit = async evt => {
     evt.preventDefault();
     gtagEvent({
       action: 'submit_register_form',
@@ -88,6 +89,24 @@ export function Register({ t }) {
       store.setError('email error');
       return alert(t('error.email'));
     }
+
+    try {
+      var student = await PostData('/lg/students', {
+        studentName: store.name,
+        studentEmail: store.email,
+        studentPhone: store.phone,
+        tags: [{ tagId: 3 }, { tagId: 2 }],
+        times: [store.times],
+      });
+
+      if (student.studentId) {
+        store.setId(student.studentId);
+        Router.push('/dashboard');
+      } else {
+        alert('Error unknow');
+      }
+    } catch (e) {}
+
     Router.push('/dashboard');
   };
 

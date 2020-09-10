@@ -212,7 +212,7 @@ export function Dashboard({ t }) {
                       style={{ marginTop: '15px' }}
                       onClick={() =>
                         copyToClipBoard(
-                          window.location.hostname + `?utm_source=referral&utm_content=${store.email}`,
+                          'https://' + window.location.hostname + `?utm_source=referral&utm_content=${store.email}`,
                           'model'
                         )
                       }>
@@ -248,7 +248,7 @@ export function Dashboard({ t }) {
                 className="referralButton"
                 onClick={() =>
                   copyToClipBoard(
-                    window.location.hostname + `?utm_source=referral&utm_content=${store.email}`,
+                    'https://' + window.location.hostname + `?utm_source=referral&utm_content=${store.email}`,
                     'fotter'
                   )
                 }>
