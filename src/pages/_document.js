@@ -8,12 +8,23 @@ import { GA_TRACKING_ID } from '../lib/gtag';
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
     const initialProps = await Document.getInitialProps(ctx);
-    return { ...initialProps };
+
+    const {
+      res: { locals },
+    } = ctx;
+    const additionalProps = {
+      languageDirection: locals.languageDirection,
+      language: locals.language,
+    };
+
+    return { ...initialProps, ...additionalProps };
   }
 
   render() {
+    const { languageDirection, language } = this.props;
+
     return (
-      <Html>
+      <Html lang={language} dir={languageDirection}>
         {/* <Global
           styles={css`
             ::selection {
