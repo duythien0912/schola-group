@@ -3,7 +3,7 @@ import { Global, css } from '@emotion/core';
 
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 
-import { GA_TRACKING_ID } from '../lib/gtag';
+import { GA_TRACKING_ID, PIXEL_TRACKING_ID } from '../lib/gtag';
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -61,6 +61,31 @@ class MyDocument extends Document {
           `,
             }}
           />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `!function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '${PIXEL_TRACKING_ID}');
+  fbq('track', 'PageView', {
+    page_path: window.location.pathname,
+  });`,
+            }}
+          />
+          <noscript async>
+            <img
+              height="1"
+              width="1"
+              style={{ display: 'none' }}
+              src={`https://www.facebook.com/tr?id=${PIXEL_TRACKING_ID}&ev=PageView&noscript=1`}
+            />
+          </noscript>
+
           {/* Global Site Tag (gtag.js) - Google Analytics */}
         </Head>
 

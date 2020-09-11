@@ -1,6 +1,4 @@
 import { request } from 'utils/request';
-import { useContext } from 'react';
-import { I18nContext } from 'next-i18next'
 
 const BASE_URL = 'http://18.138.215.174:8086';
 
