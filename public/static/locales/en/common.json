@@ -58,6 +58,7 @@
     "close_action": "close"
   },
   "error": {
-    "email": "Email can't be blank"
+    "email": "Email can't be blank",
+    "email_phone": "Email or Phone can't be blank"
   }
 }

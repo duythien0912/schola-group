@@ -58,6 +58,7 @@
     "close_action": "đóng"
   },
   "error": {
-    "email": "Xin hãy nhập email"
+    "email": "Email không được để trống",
+    "email_phone": "Email hoặc Điện thoại không được để trống"
   }
 }

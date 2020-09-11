@@ -7,7 +7,7 @@ import { i18n } from 'utils/with-i18next';
 // import Link from 'next/link';
 import { Link, Router } from '../../../i18n';
 import { userContext } from '../../context/user';
-import { PostData } from '../../lib/api';
+import { PostData, FetchData } from '../../lib/api';
 import { gtagEvent } from '../../lib/gtag';
 
 const AWhite = styled('a')`
@@ -52,8 +52,10 @@ export function Register({ t }) {
 
   const handleClickTopic = index => {
     const newselect = store.topics;
-    const indexOfItem = newselect.indexOf(rowItem[index]);
-    indexOfItem === -1 ? newselect.push(rowItem[index]) : newselect.splice(indexOfItem, 1);
+    console.log(newselect);
+    const indexOfItem = newselect.indexOf(store.registerTopic[index]);
+    indexOfItem === -1 ? newselect.push(store.registerTopic[index]) : newselect.splice(indexOfItem, 1);
+    console.log(newselect);
     store.setTopics(newselect);
     gtagEvent({
       action: 'user_select_topic',
@@ -84,6 +86,10 @@ export function Register({ t }) {
       label: store.email,
       value: store.getData(),
     });
+    // if (!store.phone && !store.email) {
+    //   store.setError('Email or Phone');
+    //   return alert(t('error.email_phone'));
+    // }
     if (!store.email) {
       store.setError('email error');
       return alert(t('error.email'));
@@ -112,6 +118,12 @@ export function Register({ t }) {
   useEffect(() => {
     const { email } = Router.query;
     if (email) store.setEmail(email);
+
+    async function fetchData() {
+      var topics = await FetchData(`/lg/tags?lang=${select}`);
+      store.setRegisterTopic(topics);
+    }
+    fetchData();
   }, [store]);
 
   return useObserver(() => (
@@ -133,12 +145,15 @@ export function Register({ t }) {
             <div className="registerHeader">{t('register.title')}</div>
             <div className="registerSectionTitle smallMarginTop">{t('register.subtitle_topic')}</div>
             <div className="rowContainer">
-              {rowItem.map((item, index) => (
+              {/* {rowItem.map((item, index) => ( */}
+              {store.registerTopic.map((item, index) => (
                 <div
                   key={'rowItem_' + index}
-                  className={`rowItem ${store.topics.includes(item) ? ' selectedRowItem' : ''}`}
+                  className={`rowItem ${
+                    store.topics.some(topic => topic.tagId === item.tagId) ? ' selectedRowItem' : ''
+                  }`}
                   onClick={() => handleClickTopic(index)}>
-                  {item}
+                  {item.tagName}
                 </div>
               ))}
             </div>

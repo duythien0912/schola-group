@@ -18,6 +18,15 @@ export const UserProvider = ({ children }) => {
         image: '/static/images/loading-image.gif',
       },
     ],
+    registerTopic: [
+      {
+        tagId: 1,
+        tagName: 'Loading 🧭',
+        tagDesc: 'Loading...!',
+        tagAction: 'Loading',
+        image: '/static/images/loading-image.gif',
+      },
+    ],
     lessons: [
       {
         scheduleId: -1,
@@ -60,6 +69,9 @@ export const UserProvider = ({ children }) => {
     },
     setHomeTopic(val) {
       store.homeTopic = val;
+    },
+    setRegisterTopic(val) {
+      store.registerTopic = val;
     },
     setLesson(val) {
       store.lessons = val;
