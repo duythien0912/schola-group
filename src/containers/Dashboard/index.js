@@ -179,7 +179,7 @@ export function Dashboard({ t }) {
                     {item.scheduleDate ? (
                       <div className={`tag`} style={{ background: 'rgb(227, 204, 255)' }}>
                         {/* {item.scheduleDate} */}
-                        {new Date(item.scheduleDate).toLocaleString()}
+                        {new Date(item.scheduleDate + '+00:00').toLocaleString()}
                       </div>
                     ) : (
                       ''
