@@ -24,7 +24,7 @@ module.exports = new NextI18Next({
   defaultNS: 'common',
   browserLanguageDetection: true,
   serverLanguageDetection: true,
-  defaultLanguage: 'vi',
+  defaultLanguage: 'en',
   otherLanguages: [
     EN,
     JA,
