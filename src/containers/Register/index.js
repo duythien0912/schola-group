@@ -42,7 +42,15 @@ const rowItem = [
   'Animals',
 ];
 
-const rowTime = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+// const rowTimeEn = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+// const rowTimeJA = ['日曜日', '月曜', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日'];
+// const rowTimeVi = ['Chủ nhật', 'Thứ hai', 'Thứ ba', 'Thứ tư', 'Thứ năm', 'Thứ sáu', 'Thứ bảy'];
+
+const rowTime = {
+  en: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+  ja: ['日曜日', '月曜', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日'],
+  vi: ['Chủ nhật', 'Thứ hai', 'Thứ ba', 'Thứ tư', 'Thứ năm', 'Thứ sáu', 'Thứ bảy'],
+};
 
 export function Register({ t }) {
   // const router = useRouter();
@@ -67,8 +75,8 @@ export function Register({ t }) {
 
   const handleClickTime = index => {
     const newTime = store.times;
-    const indexOfItem = newTime.indexOf(rowTime[index]);
-    indexOfItem === -1 ? newTime.push(rowTime[index]) : newTime.splice(indexOfItem, 1);
+    const indexOfItem = newTime.indexOf(rowTime[select][index]);
+    indexOfItem === -1 ? newTime.push(rowTime[select][index]) : newTime.splice(indexOfItem, 1);
     store.setTimes(newTime);
     gtagEvent({
       action: 'user_select_time',
@@ -159,7 +167,7 @@ export function Register({ t }) {
             </div>
             <div className="registerSectionTitle smallMarginTop">{t('register.subtitle_time')}</div>
             <div className="rowContainer">
-              {rowTime.map((item, index) => (
+              {rowTime[select].map((item, index) => (
                 <div
                   key={'rowTime_' + index}
                   className={`rowItem ${store.times.includes(item) ? ' selectedRowItem' : ''}`}

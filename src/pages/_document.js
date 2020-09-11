@@ -72,9 +72,8 @@ class MyDocument extends Document {
   s.parentNode.insertBefore(t,s)}(window, document,'script',
   'https://connect.facebook.net/en_US/fbevents.js');
   fbq('init', '${PIXEL_TRACKING_ID}');
-  fbq('track', 'PageView', {
-    page_path: window.location.pathname,
-  });`,
+  fbq('track', 'PageView');
+  `,
             }}
           />
           <noscript async>
