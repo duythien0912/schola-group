@@ -1,7 +1,7 @@
 import { request } from 'utils/request';
 
 // const BASE_URL = 'http://18.138.215.174:8086';
-const BASE_URL = 'http://ap-admin.schola.tv:8086';
+const BASE_URL = 'https://kidslive.schola.tv';
 
 const FetchData = async url => {
   return await request(BASE_URL + url);
