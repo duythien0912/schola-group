@@ -167,7 +167,7 @@ export function Register({ t }) {
             </div>
             <div className="registerSectionTitle smallMarginTop">{t('register.subtitle_time')}</div>
             <div className="rowContainer">
-              {rowTime[select].map((item, index) => (
+              {rowTime[store.selectLang ?? 'en'].map((item, index) => (
                 <div
                   key={'rowTime_' + index}
                   className={`rowItem ${store.times.includes(item) ? ' selectedRowItem' : ''}`}

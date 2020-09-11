@@ -9,6 +9,7 @@ useStaticRendering(isServer);
 
 export const UserProvider = ({ children }) => {
   const store = useLocalStore(() => ({
+    selectLang: 'en',
     homeTopic: [
       {
         tagId: 1,
@@ -66,6 +67,9 @@ export const UserProvider = ({ children }) => {
         topics: store.topics,
         times: store.times,
       };
+    },
+    setLang(val) {
+      store.selectLang = val;
     },
     setHomeTopic(val) {
       store.homeTopic = val;
