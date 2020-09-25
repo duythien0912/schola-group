@@ -61,7 +61,7 @@ export function SelectLanguages({ t }) {
     <div className="dropdown-container">
       <SelectRoot name="languages" id="languages" value={select} onChange={handleSelect}>
         <option value="en">{t('en')}</option>
-        {/* <option value="vi">{t('vi')}</option> */}
+        <option value="vi">{t('vi')}</option>
         <option value="ja">{t('ja')}</option>
       </SelectRoot>
     </div>
